@@ -17,11 +17,24 @@
   "license": "ISC",
   "author": "Hopper",
   "type": "commonjs",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node src/index.ts",
+    "test": "jest"
   },
   "devDependencies": {
-    "@tsconfig/recommended": "^1.0.13"
+    "@tsconfig/recommended": "^1.0.13",
+    "@types/express": "^5.0.6",
+    "@types/jest": "^30.0.0",
+    "@types/papaparse": "^5.5.2",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "papaparse": "^5.5.3",
+    "zod": "^4.3.6"
   }
 }
