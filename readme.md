@@ -40,11 +40,15 @@ You can find example CSV files in the examples folder.
 
 ### Assumptions
 
+### Storing Data Even When Enrichment Fails
 I assumed that even if we cannot enrich the phone calls, we still want to store them as we wouldn't want to lose this data. As such I made them return default values in the case of the failure. Potentially you could go back and enrich unsuccessful records at a later time.
 
 ### Trade Offs
 
-I didn't do any retries of the lookup. With 0.05% failure rate, and the requirements of 500ms, retries would significantly increase this response time. However, I could have implemented a timeout, to allow more retries. In real life I might suggest sending validated batches to a seperate service that does the lookups, and retries. This would return after validation was successful. For example you could call lamda functions to concurrently to do lookups, and store that in a database.  You could even store the initial valid data, and create a queue for an enrichment service to go in and update each record with the enriched data. This means this service is no longer reliant on the external api. 
+I didn't do any retries of the lookup. With 0.05% failure rate, and the requirements of 500ms, retries would significantly increase this response time. However, I could have implemented a timeout, to allow more retries. 
+
+### Potential Improvements 
+In real life I might suggest offloading validated batches to a seperate service that does the lookups, and retries. This would return after validation was successful. For example you could call lambda functions to concurrently to do lookups, and store that in a database.  You could even store the initial valid data, and create a queue for an enrichment service to go in and update each record with the enriched data. This means this service is no longer reliant on the external api. 
 
 ## Database options
 
@@ -52,4 +56,4 @@ Having done some research I might use PostGreSQL, potentially with timescaleDB e
 
 PostGres can also be scaled horizontally by partioning. For example you could partion by time range pretty easily. 
 
-In this implementation  I have just implemented a simple database manager that just stores the json in a log for visual purposes. 
+In this implementation,  I have just implemented a simple database manager that just stores the json in a log for visual purposes. 
