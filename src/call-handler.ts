@@ -81,7 +81,7 @@ export class CallHandler {
    * Checks if the CSV headers match the expected format.
    * @params record - the first line from
    */
-  private checkHeaders(record: unknown): boolean {
+  private checkHeaders(record: Record<string, string>): boolean {
     //could be passed in from environment instead of hardcoded
     const expectedHeaders = [
       "id",
@@ -93,7 +93,7 @@ export class CallHandler {
       "region",
     ];
 
-    const actualHeaders = Object.keys(record as Record<string, unknown>);
+    const actualHeaders = Object.keys(record as Record<string, string>);
 
     if (expectedHeaders.length !== actualHeaders.length) return false;
 
@@ -103,7 +103,7 @@ export class CallHandler {
       .every((h, i) => h === actualHeaders.sort()[i]);
   }
 
-  private validateCsvBatch(data: unknown[]): ValidationResult {
+  private validateCsvBatch(data: CallRecord[]): ValidationResult {
     const validRecords: CallRecord[] = [];
     const invalidRecords: InvalidRecord[] = [];
 

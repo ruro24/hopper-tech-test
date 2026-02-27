@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { CallRecord } from "../types/call-record.i";
 
 const phoneRegex = /^\+\d{10,15}$/;
 
@@ -16,7 +17,7 @@ const callRecordSchema = z.object({
   region: z.string().min(1, "Region cannot be empty"),
 });
 
-export function validateCallRecord(record: unknown): {
+export function validateCallRecord(record: CallRecord): {
   isValid: boolean;
   errors?: string[];
 } {
