@@ -82,7 +82,7 @@ export class CallHandler {
    * @params record - the first line from
    */
   private checkHeaders(record: unknown): boolean {
-    console.log(record);
+    //could be passed in from environment instead of hardcoded
     const expectedHeaders = [
       "id",
       "callStartTime",
