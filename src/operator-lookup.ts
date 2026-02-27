@@ -24,7 +24,7 @@ export async function lookupOperator(
   await new Promise((resolve) => setTimeout(resolve, delay));
 
   // Simulate ~5% failure rate
-  if (Math.random() < 0.5) {
+  if (Math.random() < 0.05) {
     throw new Error("Operator lookup service temporarily unavailable");
   }
 

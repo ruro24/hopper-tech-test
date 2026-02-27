@@ -1,6 +1,7 @@
 import express from "express";
 import fs from "fs/promises";
 import { CallHandler } from "./call-handler";
+import { DatabaseManager } from "./db/dbManager";
 
 const app = express();
 const PORT = 3000;
@@ -21,6 +22,7 @@ app.post("/", async (req, res) => {
     // Process CSV
     const callHandler = new CallHandler();
     const result = await callHandler.handleBatch(csvData);
+
     if (result.status !== 200) {
       res.status(result.status).json({ success: false, error: result.error });
     } else {
@@ -33,17 +35,7 @@ app.post("/", async (req, res) => {
 });
 
 //close database connection on shutdown
-process.on("SIGINT", async () => {
-  console.log("Shutting down gracefully...");
-  // Here you would close any database connections if needed
-  process.exit(0);
-});
 
-process.on("SIGTERM", async () => {
-  console.log("Shutting down gracefully...");
-  // Here you would close any database connections if needed
-  process.exit(0);
-});
 app.listen(PORT, () => {
   console.log(`CSV processor API running on http://localhost:${PORT}`);
 });
