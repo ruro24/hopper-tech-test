@@ -32,6 +32,18 @@ app.post("/", async (req, res) => {
   }
 });
 
+//close database connection on shutdown
+process.on("SIGINT", async () => {
+  console.log("Shutting down gracefully...");
+  // Here you would close any database connections if needed
+  process.exit(0);
+});
+
+process.on("SIGTERM", async () => {
+  console.log("Shutting down gracefully...");
+  // Here you would close any database connections if needed
+  process.exit(0);
+});
 app.listen(PORT, () => {
   console.log(`CSV processor API running on http://localhost:${PORT}`);
 });
