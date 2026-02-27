@@ -1,4 +1,4 @@
-import { EnrichedCallRecord } from "../call-record.i";
+import { EnrichedCallRecord } from "../types/call-record.i";
 import fs from "fs";
 
 export class DatabaseManager {
