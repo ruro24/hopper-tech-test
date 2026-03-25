@@ -30,12 +30,17 @@ export class CallHandler {
       };
     }
 
-    if (!data.length || !this.checkHeaders(data[0])) {
+    if (
+      !data.length ||
+      !this.checkHeaders((data[0] as Record<string, string>) || null)
+    ) {
       return { status: 400, error: "Invalid CSV headers" };
     }
 
     //these invalid records could be logged for later review
-    const { validRecords, invalidRecords } = this.validateCsvBatch(data);
+    const { validRecords, invalidRecords } = this.validateCsvBatch(
+      data as CallRecord[],
+    );
 
     if (!validRecords.length) {
       return { status: 400, error: "No valid records to process" };
