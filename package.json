@@ -20,7 +20,8 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "dev": "NODE_ENV=development ts-node src/index.ts"
+    "dev": "NODE_ENV=development ts-node src/index.ts",
+    "test": "jest --coverage"
   },
   
   "devDependencies": {

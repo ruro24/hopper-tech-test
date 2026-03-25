@@ -2,7 +2,7 @@ import { CallHandler } from "../call-handler";
 import { validateCallRecord } from "../utils/validation";
 import { DatabaseManager } from "../db/dbManager";
 import { lookupOperator, OperatorInfo } from "../operator-lookup";
-import fs from "fs";
+import { CallRecord } from "../types/call-record.i";
 
 jest.mock("../operator-lookup", () => ({
   lookupOperator: jest.fn(),
@@ -22,7 +22,7 @@ describe("validation utilities", () => {
       toNumber: "+442071838750",
       callType: "voice",
       region: "US",
-    };
+    } as CallRecord;
     const { isValid, errors } = validateCallRecord(rec);
     expect(isValid).toBe(true);
     expect(errors).toBeUndefined();
